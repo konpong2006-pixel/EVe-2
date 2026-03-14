@@ -3,72 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Evee Vault 🤎 (Free Version)</title>
+    <title>Our Evee Vault 🤎</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600&family=Playfair+Display:italic,wght@600&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Noto Sans Thai', sans-serif; background-color: #FDFBF7; scroll-behavior: smooth; }
         .serif { font-family: 'Playfair Display', serif; }
-        .loading-fade { opacity: 0; pointer-events: none; transition: all 1s ease; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        .heart-beat { animation: heartbeat 1.2s infinite; }
+        .fade-out { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
     </style>
 </head>
 <body class="text-[#5D4037]">
 
     <div id="loader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#FDFBF7]">
-        <div class="w-12 h-12 border-4 border-[#D4A373]/20 border-t-[#6F4E37] rounded-full animate-spin"></div>
-        <p class="mt-4 serif italic text-[#A67B5B] animate-pulse">Loading Our Memories...</p>
+        <div class="relative flex items-center justify-center">
+            <div class="w-20 h-20 border-2 border-[#D4A373]/20 border-t-[#6F4E37] rounded-full animate-spin"></div>
+            <div class="absolute">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-[#6F4E37] heart-beat" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </div>
+        </div>
+        <p class="mt-4 serif italic text-[#A67B5B] tracking-widest animate-pulse">Opening Evee Vault...</p>
     </div>
 
     <nav class="p-6 flex justify-between items-center sticky top-0 bg-[#FDFBF7]/90 backdrop-blur-md z-40 border-b border-[#E7DCD3]/50">
         <h1 class="serif text-2xl italic font-bold text-[#6F4E37]">Evee.</h1>
-        <a href="#upload-section" class="text-[10px] font-bold uppercase tracking-widest bg-[#6F4E37] text-white px-4 py-2 rounded-full shadow-md">Add New</a>
+        <a href="#upload-section" class="text-[10px] font-bold uppercase tracking-widest bg-[#6F4E37] text-white px-4 py-2 rounded-full shadow-md hover:bg-[#A67B5B] transition">Add New</a>
     </nav>
 
     <header class="text-center py-16 px-4">
-        <h2 class="serif text-5xl mb-4 italic text-[#6F4E37]">Our Journey</h2>
-        <p class="text-[#8D6E63] italic text-sm">"ใช้แค่ Firestore ก็เก็บความทรงจำได้ฟรีๆ"</p>
+        <span class="text-[10px] uppercase tracking-[0.4em] text-[#A67B5B] mb-2 block font-bold">Memory Collector</span>
+        <h2 class="serif text-5xl md:text-6xl mb-4 italic text-[#6F4E37]">Our Journey</h2>
+        <p class="text-[#8D6E63] italic text-sm">"ใช้แค่ Firestore ก็เก็บความทรงจำได้ฟรีตลอดชีพ"</p>
     </header>
 
-    <section id="upload-section" class="max-w-xl mx-auto px-6 mb-20">
+    <section id="upload-section" class="max-w-xl mx-auto px-6 mb-24">
         <div class="bg-white p-8 rounded-3xl border border-[#E7DCD3] shadow-sm">
-            <h3 class="serif text-xl text-[#6F4E37] mb-6 text-center italic font-bold">เพิ่มความทรงจำใหม่</h3>
-            <div class="space-y-4">
+            <h3 class="serif text-2xl text-[#6F4E37] mb-6 text-center italic font-bold">New Memory</h3>
+            <div class="space-y-5">
                 <div>
-                    <label class="text-[10px] uppercase tracking-widest text-[#A67B5B] font-bold block mb-2">ลิงก์รูปภาพ (Image URL)</label>
-                    <input type="text" id="imageUrlInput" placeholder="https://example.com/photo.jpg" 
-                        class="w-full p-4 rounded-xl bg-[#FDFBF7] border border-[#E7DCD3] focus:outline-none focus:ring-1 focus:ring-[#A67B5B] text-sm">
-                    <p class="text-[9px] text-[#A67B5B] mt-1">* ก๊อปปี้ลิงก์รูปมาวางได้เลยจ้า</p>
+                    <label class="text-[10px] uppercase tracking-[0.2em] text-[#A67B5B] font-bold block mb-2">Image URL (ลิงก์รูปภาพ)</label>
+                    <input type="text" id="imageUrlInput" placeholder="วางลิงก์รูปภาพ .jpg หรือ .png ที่นี่" 
+                        class="w-full p-4 rounded-xl bg-[#FDFBF7] border border-[#E7DCD3] focus:outline-none focus:ring-1 focus:ring-[#A67B5B] text-sm text-[#5D4037]">
                 </div>
                 
                 <div>
-                    <label class="text-[10px] uppercase tracking-widest text-[#A67B5B] font-bold block mb-2">หัวข้อ</label>
+                    <label class="text-[10px] uppercase tracking-[0.2em] text-[#A67B5B] font-bold block mb-2">Title (หัวข้อ)</label>
                     <input type="text" id="titleInput" placeholder="วันนี้ทำอะไรกันนะ?" 
-                        class="w-full p-4 rounded-xl bg-[#FDFBF7] border border-[#E7DCD3] focus:outline-none focus:ring-1 focus:ring-[#A67B5B] text-sm">
+                        class="w-full p-4 rounded-xl bg-[#FDFBF7] border border-[#E7DCD3] focus:outline-none focus:ring-1 focus:ring-[#A67B5B] text-sm text-[#5D4037]">
                 </div>
 
                 <div>
-                    <label class="text-[10px] uppercase tracking-widest text-[#A67B5B] font-bold block mb-2">บันทึกสั้นๆ</label>
+                    <label class="text-[10px] uppercase tracking-[0.2em] text-[#A67B5B] font-bold block mb-2">Description (บันทึกสั้นๆ)</label>
                     <textarea id="descInput" placeholder="เขียนข้อความถึงกัน..." 
-                        class="w-full p-4 rounded-xl bg-[#FDFBF7] border border-[#E7DCD3] focus:outline-none focus:ring-1 focus:ring-[#A67B5B] h-24 text-sm"></textarea>
+                        class="w-full p-4 rounded-xl bg-[#FDFBF7] border border-[#E7DCD3] focus:outline-none focus:ring-1 focus:ring-[#A67B5B] h-28 text-sm text-[#5D4037]"></textarea>
                 </div>
 
-                <button onclick="saveToFirestore()" id="saveBtn" class="w-full py-4 bg-[#6F4E37] text-white rounded-xl font-bold shadow-lg hover:bg-[#5D4037] transition-all">
-                    Save Memory
+                <button onclick="saveToFirestore()" id="saveBtn" class="w-full py-4 bg-[#6F4E37] text-white rounded-xl font-bold shadow-lg hover:bg-[#5D4037] transition-all active:scale-95">
+                    Save to Vault
                 </button>
             </div>
         </div>
     </section>
 
     <main class="max-w-6xl mx-auto px-6 pb-32">
+        <div class="flex items-center gap-4 mb-10">
+            <div class="h-[1px] bg-[#E7DCD3] flex-1"></div>
+            <h3 class="serif italic text-[#A67B5B]">Our Memories</h3>
+            <div class="h-[1px] bg-[#E7DCD3] flex-1"></div>
+        </div>
         <div id="memory-display" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             </div>
     </main>
+
+    <footer class="text-center py-20 border-t border-[#E7DCD3] bg-white">
+        <div class="serif italic text-[#6F4E37] text-xl mb-2">Forever & Always</div>
+        <p class="text-[9px] uppercase tracking-[0.4em] text-[#A67B5B]">Made with love for Evee</p>
+    </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Config ของคุณ (อันเดิม)
+        // Your Firebase Config (Config เดิมของคุณ)
         const firebaseConfig = {
             apiKey: "AIzaSyBa7eT4nHVYZfBZw3wStFgBl-Hyw-RsAH0",
             authDomain: "evee-29429.firebaseapp.com",
@@ -82,14 +101,14 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // ฟังก์ชันบันทึกข้อมูล (เฉพาะข้อความและลิงก์)
+        // --- ฟังก์ชันบันทึกข้อมูลไปที่ Firestore ---
         window.saveToFirestore = async () => {
             const imageUrl = document.getElementById('imageUrlInput').value;
             const title = document.getElementById('titleInput').value;
             const desc = document.getElementById('descInput').value;
             const btn = document.getElementById('saveBtn');
 
-            if(!imageUrl || !title) return alert("ใส่ลิงก์รูปกับหัวข้อด้วยนะจ๊ะ!");
+            if(!imageUrl || !title) return alert("ใส่ลิงก์รูปกับหัวข้อด้วยนะจ๊ะ ❤️");
 
             btn.innerText = "Saving...";
             btn.disabled = true;
@@ -101,37 +120,52 @@
                     description: desc,
                     createdAt: new Date()
                 });
-                alert("บันทึกสำเร็จ! ✨");
+                alert("บันทึกความทรงจำสำเร็จ! ✨");
+                // ล้างค่าในช่องกรอก
                 document.getElementById('imageUrlInput').value = "";
                 document.getElementById('titleInput').value = "";
                 document.getElementById('descInput').value = "";
             } catch (e) {
                 alert("เกิดข้อผิดพลาด: " + e.message);
             } finally {
-                btn.innerText = "Save Memory";
+                btn.innerText = "Save to Vault";
                 btn.disabled = false;
             }
         };
 
-        // ดึงข้อมูลมาโชว์ (Real-time)
+        // --- ดึงข้อมูลแบบ Real-time มาโชว์ ---
         onSnapshot(query(collection(db, "memories"), orderBy("createdAt", "desc")), (snapshot) => {
             const display = document.getElementById('memory-display');
             let html = "";
             snapshot.forEach((doc) => {
                 const data = doc.data();
+                // ข้ามอันที่ไม่มีข้อมูลครบ
+                if(!data.imageUrl || !data.title) return;
+
                 html += `
-                    <div class="bg-white p-4 rounded-3xl border border-[#E7DCD3] shadow-sm overflow-hidden">
-                        <img src="${data.imageUrl}" class="w-full h-64 object-cover rounded-2xl mb-4 shadow-inner" onerror="this.src='https://via.placeholder.com/400x400?text=Invalid+Image+URL'">
-                        <h4 class="serif text-xl text-[#6F4E37] font-bold">${data.title}</h4>
-                        <p class="text-sm text-[#8D6E63] mt-2">${data.description || ""}</p>
+                    <div class="bg-white p-4 rounded-3xl border border-[#E7DCD3] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-6 bg-[#FDFBF7]">
+                            <img src="${data.imageUrl}" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700" onerror="this.src='https://via.placeholder.com/400x400?text=Invalid+Image+URL'">
+                        </div>
+                        <div class="px-2">
+                            <h4 class="serif text-2xl text-[#6F4E37] mb-2 font-bold">${data.title}</h4>
+                            <p class="text-sm text-[#8D6E63] leading-relaxed mb-4">${data.description || ""}</p>
+                            <div class="h-[1px] bg-[#FDFBF7] w-full mb-2"></div>
+                            <span class="text-[9px] text-[#A67B5B] uppercase tracking-widest">
+                                ${data.createdAt?.toDate ? data.createdAt.toDate().toLocaleDateString('th-TH') : 'Just now'}
+                            </span>
+                        </div>
                     </div>
                 `;
             });
             display.innerHTML = html;
         });
 
+        // --- ปิดหน้า Loading ---
         window.addEventListener('load', () => {
-            setTimeout(() => document.getElementById('loader').classList.add('loading-fade'), 1000);
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('fade-out');
+            }, 1500);
         });
     </script>
 </body>
